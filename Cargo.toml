@@ -1,0 +1,39 @@
+[package]
+name = "quantum-vault-pinocchio"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[features]
+no-entrypoint = []
+cpi = ["no-entrypoint"]
+default = []
+custom-heap = []
+custom-panic = []
+
+
+[dependencies]
+pinocchio.workspace = true
+pinocchio-associated-token-account = "0.2.0"
+pinocchio-log.workspace = true
+pinocchio-pubkey.workspace = true
+pinocchio-system.workspace = true
+pinocchio-token = "0.4.0"
+solana-nostd-sha256 = "0.1.3"
+solana-winternitz = "0.1.1"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = [
+    'cfg(target_os, values("solana"))',
+] }
+
+[dev-dependencies]
+litesvm = "0.8.1"
+solana-sdk = "3.0.0"
+litesvm-token = "0.8.1"
+solana-system-interface = { version = "3.0.0", features = ["bincode"] }
+spl-associated-token-account = "8.0.0"
+spl-token = "9.0.0"
+spl-associated-token-account-interface = "2.0.0"
